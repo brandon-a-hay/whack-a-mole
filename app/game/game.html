@@ -1,0 +1,30 @@
+<div class="container" id="grid">
+  <div class="alert alert-warning" ng-show="vm.displayLevelAlert">
+    You are now on <strong>Level {{vm.currentLevel.level}}</strong>
+  </div>
+  <h1>Whack-a-mole</h1>
+  <div ng-if="vm.topScore > 0">
+    Top score: {{vm.topScore}}
+  </div>
+  <div id="gamestats" ng-if="vm.gameStarted">
+    <span class="timer">Time left: {{vm.roundTime}}</span><br>
+    <span class="score">
+      score: {{vm.score}}
+    </span>
+  </div>
+
+  <button ng-click="vm.startGame()" class="btn btn-primary" ng-disabled="vm.gameStarted">Start!</button>
+
+  <!-- holes -->
+  <div ng-repeat="row in vm.rows" class="row">
+    <div id="gridrow" ng-repeat="column in vm.columns" class="col-md-2" style="">
+      <button id="{{$parent.$index + 1}}-{{$index + 1}}" class="btn-default hole"
+        ng-click="vm.whack({row:$parent.$index + 1, col:$index + 1})">
+      </button>
+    </div>
+  </div>
+
+  <audio id="whacksoundclip" preload="auto">
+    <source src="whack.wav"></source>
+  </audio>
+</div>
